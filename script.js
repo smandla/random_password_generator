@@ -7,7 +7,7 @@ var generateBtn = document.querySelector("#generate");
  * variables to save user input
  */
 let savedPasswordLength;
-
+let savedIncludeLowercase;
 /**
  * Function to fully generate random password based on user input from prompts
  */
@@ -40,11 +40,35 @@ function generatePassword() {
       /** Else, save input to saved variables */
       savedPasswordLength = passwordLengthInput;
     }
-    return savedPasswordLength;
+    // return savedPasswordLength;
+  }
+
+  /** Second Prompt - Include Lowercase */
+  function includeLowercasePrompt() {
+    let lowercaseInput = confirm(
+      "Would you like to include lowercase characters in your password?"
+    );
+    console.log(lowercaseInput);
+    savedIncludeLowercase = lowercaseInput;
+    return savedIncludeLowercase;
+  }
+
+  /** Third Prompt - Include Uppercase */
+  function includeUppercasePrompt() {
+    let uppercaseInput = confirm(
+      "Would you like to include uppercase characters in your password?"
+    );
+    console.log(uppercaseInput);
+    savedIncludeUppercase = uppercaseInput;
+    return savedIncludeUppercase;
   }
 
   /** Call Length prompt function */
   lengthInputPrompt();
+  /** Call lowercase prompt function */
+  includeLowercasePrompt();
+  /** Call uppercase prompt function */
+  includeUppercasePrompt();
 }
 
 // Write password to the #password input
