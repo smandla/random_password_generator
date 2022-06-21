@@ -8,6 +8,9 @@ var generateBtn = document.querySelector("#generate");
  */
 let savedPasswordLength;
 let savedIncludeLowercase;
+let savedIncludeUppercase;
+let savedIncludeNumbers;
+let savedIncludeSpecialChars;
 /**
  * Function to fully generate random password based on user input from prompts
  */
@@ -62,6 +65,25 @@ function generatePassword() {
     savedIncludeUppercase = uppercaseInput;
     return savedIncludeUppercase;
   }
+  /** Fourth Prompt - Include Numbers */
+  function includeNumbersPrompt() {
+    let numbersInput = confirm(
+      "Would you like to include numbers characters in your password?"
+    );
+    console.log(numbersInput);
+    savedIncludeNumbers = numbersInput;
+    return savedIncludeNumbers;
+  }
+
+  /** Fifth Prompt - Include Special Chars */
+  function includeSpecialCharsPrompt() {
+    let specialCharsInput = confirm(
+      "Would you like to include special characters ('!', '@', '#', '$', '%', '^', '&', '*', '(', ')') characters in your password?"
+    );
+    console.log(specialCharsInput);
+    savedIncludeSpecialChars = specialCharsInput;
+    return savedIncludeSpecialChars;
+  }
 
   /** Call Length prompt function */
   lengthInputPrompt();
@@ -69,6 +91,10 @@ function generatePassword() {
   includeLowercasePrompt();
   /** Call uppercase prompt function */
   includeUppercasePrompt();
+  /** Call numbers prompt function */
+  includeNumbersPrompt();
+  /** Call special characters prompt function */
+  includeSpecialCharsPrompt();
 }
 
 // Write password to the #password input
