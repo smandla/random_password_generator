@@ -18,7 +18,7 @@ let savedIncludeSpecialChars;
 var lowercase = "abcdefghijklmnopqrstuvwx";
 var uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 var numbers = "0123456789";
-var specialChars = " !\"#$%&'()*+,-./:;<=>?@[]^_`{|}~";
+var specialChars = "!\"#$%&'()*+,-./:;<=>?@[]^_`{|}~";
 
 //variable to include all chosen character types
 let passwordStr = "";
@@ -28,6 +28,10 @@ let generatedPassword = "";
  * Function to fully generate random password based on user input from prompts
  */
 function generatePassword() {
+  //reset everytime 'Generate Password' Button is clicked
+  generatedPassword = "";
+  passwordStr = "";
+  console.log(passwordStr);
   /**
    * First prompt once generateBtn is clicked
    * Function that saves user input for password length
@@ -36,10 +40,13 @@ function generatePassword() {
     // Prompt User to input password length
     let passwordLengthInput = prompt(
       "How many characters (8 - 128) would you like your password to contain?"
-    );
-    console.log(passwordLengthInput);
+    ).trim();
     // If input length is 0 or input is null, re-alert user
-    if (passwordLengthInput.length === 0 || passwordLengthInput === null) {
+    if (typeof passwordLengthInput === "string") {
+      alert("Please enter only number values!");
+      lengthInputPrompt();
+    }
+    if (passwordLengthInput === null) {
       alert(
         "Can't generate password without choosing number of characters! Please retry!"
       );
@@ -49,6 +56,9 @@ function generatePassword() {
     // Else if the input is < 8, re-alert user
     else if (passwordLengthInput < 8) {
       alert("Password must be atleast 8 characters!");
+
+      /** Call function again */
+      lengthInputPrompt();
     }
     // Else if the input is > 128, re-alert user
     else if (passwordLengthInput > 128) {
