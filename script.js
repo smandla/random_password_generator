@@ -31,7 +31,7 @@ function generatePassword() {
   //reset everytime 'Generate Password' Button is clicked
   generatedPassword = "";
   passwordStr = "";
-  console.log(passwordStr);
+  // console.log(passwordStr);
   /**
    * First prompt once generateBtn is clicked
    * Function that saves user input for password length
@@ -41,12 +41,13 @@ function generatePassword() {
     let passwordLengthInput = prompt(
       "How many characters (8 - 128) would you like your password to contain?"
     ).trim();
-    // If input length is 0 or input is null, re-alert user
-    if (typeof passwordLengthInput === "string") {
+    // If input length is not a number, re-alert user
+    if (isNaN(passwordLengthInput)) {
       alert("Please enter only number values!");
       lengthInputPrompt();
     }
-    if (passwordLengthInput === null) {
+    //if input is null, re-alert user
+    else if (passwordLengthInput === null) {
       alert(
         "Can't generate password without choosing number of characters! Please retry!"
       );
