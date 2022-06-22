@@ -85,18 +85,36 @@ function generatePassword() {
     return savedIncludeSpecialChars;
   }
 
-  /** Call Length prompt function */
-  lengthInputPrompt();
-  /** Call lowercase prompt function */
-  includeLowercasePrompt();
-  /** Call uppercase prompt function */
-  includeUppercasePrompt();
-  /** Call numbers prompt function */
-  includeNumbersPrompt();
-  /** Call special characters prompt function */
-  includeSpecialCharsPrompt();
-}
+  /** Function to call prompts and ensure atleast one character type is chosen */
+  function promptsForUser() {
+    /** Call Length prompt function */
+    lengthInputPrompt();
+    /** Call lowercase prompt function */
+    includeLowercasePrompt();
+    /** Call uppercase prompt function */
+    includeUppercasePrompt();
+    /** Call numbers prompt function */
+    includeNumbersPrompt();
+    /** Call special characters prompt function */
+    includeSpecialCharsPrompt();
 
+    /** If all prompts that involve including characters is false, re-alert user since atleast one needs to be true */
+    if (
+      savedIncludeLowercase === false &&
+      savedIncludeUppercase === false &&
+      savedIncludeNumbers === false &&
+      savedIncludeSpecialChars === false
+    ) {
+      alert("Please choose atleast one character type!");
+      includeLowercasePrompt();
+      includeUppercasePrompt();
+      includeNumbersPrompt();
+      includeSpecialCharsPrompt();
+    }
+  }
+
+  promptsForUser();
+}
 // Write password to the #password input
 function writePassword() {
   var password = generatePassword();
