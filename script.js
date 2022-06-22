@@ -11,6 +11,19 @@ let savedIncludeLowercase;
 let savedIncludeUppercase;
 let savedIncludeNumbers;
 let savedIncludeSpecialChars;
+
+/**
+ * character type variables
+ */
+var lowercase = "abcdefghijklmnopqrstuvwx";
+var uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+var numbers = "0123456789";
+var specialChars = "!@#$%^&*()";
+
+//variable to include all chosen character types
+let passwordArray = "";
+let generatedPassword = "";
+
 /**
  * Function to fully generate random password based on user input from prompts
  */
