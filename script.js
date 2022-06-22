@@ -18,10 +18,10 @@ let savedIncludeSpecialChars;
 var lowercase = "abcdefghijklmnopqrstuvwx";
 var uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 var numbers = "0123456789";
-var specialChars = "!@#$%^&*()";
+var specialChars = " !\"#$%&'()*+,-./:;<=>?@[]^_`{|}~";
 
 //variable to include all chosen character types
-let passwordArray = "";
+let passwordStr = "";
 let generatedPassword = "";
 
 /**
@@ -33,69 +33,63 @@ function generatePassword() {
    * Function that saves user input for password length
    */
   function lengthInputPrompt() {
-    /** Prompt User to input password length */
+    // Prompt User to input password length
     let passwordLengthInput = prompt(
-      "Please choose the number of characters you'd like your password to generate (8 - 128 characters)"
+      "How many characters (8 - 128) would you like your password to contain?"
     );
     console.log(passwordLengthInput);
-    /** If input length is 0 or input is null, re-alert user */
+    // If input length is 0 or input is null, re-alert user
     if (passwordLengthInput.length === 0 || passwordLengthInput === null) {
       alert(
         "Can't generate password without choosing number of characters! Please retry!"
       );
-      /** Call function again */
+      // Call function again
       lengthInputPrompt();
-    } else if (passwordLengthInput < 8 || passwordLengthInput > 128) {
-      /** Else if the input is < 8 or > 128, re-alert user */
-      alert(
-        "Can't generate password with < 8 or > 128 characters! Please retry!"
-      );
+    }
+    // Else if the input is < 8, re-alert user
+    else if (passwordLengthInput < 8) {
+      alert("Password must be atleast 8 characters!");
+    }
+    // Else if the input is > 128, re-alert user
+    else if (passwordLengthInput > 128) {
+      alert("Password must be more than 128 characters!");
       /** Call function again */
       lengthInputPrompt();
     } else {
-      /** Else, save input to saved variables */
+      // Else, save input to saved variables
       savedPasswordLength = passwordLengthInput;
     }
-    // return savedPasswordLength;
   }
 
   /** Second Prompt - Include Lowercase */
   function includeLowercasePrompt() {
     let lowercaseInput = confirm(
-      "Would you like to include lowercase characters in your password?"
+      "Click OK to confirm including lowercase characters. Click CANCEL to not include."
     );
-    console.log(lowercaseInput);
     savedIncludeLowercase = lowercaseInput;
-    return savedIncludeLowercase;
   }
 
   /** Third Prompt - Include Uppercase */
   function includeUppercasePrompt() {
     let uppercaseInput = confirm(
-      "Would you like to include uppercase characters in your password?"
+      "Click OK to confirm including uppercase characters. Click CANCEL to not include."
     );
-    console.log(uppercaseInput);
     savedIncludeUppercase = uppercaseInput;
-    return savedIncludeUppercase;
   }
   /** Fourth Prompt - Include Numbers */
   function includeNumbersPrompt() {
     let numbersInput = confirm(
-      "Would you like to include numbers characters in your password?"
+      "Click OK to confirm including number characters. Click CANCEL to not include."
     );
-    console.log(numbersInput);
     savedIncludeNumbers = numbersInput;
-    return savedIncludeNumbers;
   }
 
   /** Fifth Prompt - Include Special Chars */
   function includeSpecialCharsPrompt() {
     let specialCharsInput = confirm(
-      "Would you like to include special characters ('!', '@', '#', '$', '%', '^', '&', '*', '(', ')') characters in your password?"
+      "Click OK to confirm including special characters. Click CANCEL to not include."
     );
-    console.log(specialCharsInput);
     savedIncludeSpecialChars = specialCharsInput;
-    return savedIncludeSpecialChars;
   }
 
   /** Function to call prompts and ensure atleast one character type is chosen */
@@ -126,7 +120,36 @@ function generatePassword() {
     }
   }
 
+  /** Call Prompts function */
   promptsForUser();
+
+  /** Add chosen character types to the passwordStr */
+  if (savedIncludeLowercase) {
+    passwordStr += lowercase;
+  }
+  if (savedIncludeUppercase) {
+    passwordStr += uppercase;
+  }
+  if (savedIncludeNumbers) {
+    passwordStr += numbers;
+  }
+  if (savedIncludeSpecialChars) {
+    passwordStr += specialChars;
+  }
+
+  /**
+   * Loop to generate password based on inputted length
+   * by taking random characters from passwordStr
+   */
+  for (let i = 0; i <= passwordStr.length; i++) {
+    //variable to get random index based off passwordStr length
+    let randomIndex = Math.floor(Math.random() * passwordStr.length);
+    //pick char based off randomIndex and append to generatedPassword
+    generatedPassword += passwordStr[randomIndex];
+  }
+
+  //return generatedPassword result
+  return generatedPassword;
 }
 // Write password to the #password input
 function writePassword() {
