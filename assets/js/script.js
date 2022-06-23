@@ -28,19 +28,17 @@ let generatedPassword = "";
  * Function to fully generate random password based on user input from prompts
  */
 function generatePassword() {
-  //reset everytime 'Generate Password' Button is clicked
-  generatedPassword = "";
-  passwordStr = "";
-  // console.log(passwordStr);
   /**
    * First prompt once generateBtn is clicked
    * Function that saves user input for password length
    */
   function lengthInputPrompt() {
-    // Prompt User to input password length
+    // Prompt User to input password length while trimming whitespace
     let passwordLengthInput = prompt(
       "How many characters (8 - 128) would you like your password to contain?"
     ).trim();
+    // convert to number
+    passwordLengthInput = Math.floor(passwordLengthInput);
     // If input length is not a number, re-alert user
     if (isNaN(passwordLengthInput)) {
       alert("Please enter only number values!");
@@ -58,13 +56,13 @@ function generatePassword() {
     else if (passwordLengthInput < 8) {
       alert("Password must be atleast 8 characters!");
 
-      /** Call function again */
+      // Call function again
       lengthInputPrompt();
     }
     // Else if the input is > 128, re-alert user
     else if (passwordLengthInput > 128) {
       alert("Password must be more than 128 characters!");
-      /** Call function again */
+      // Call function again
       lengthInputPrompt();
     } else {
       // Else, save input to saved variables
@@ -152,7 +150,7 @@ function generatePassword() {
    * Loop to generate password based on inputted length
    * by taking random characters from passwordStr
    */
-  for (let i = 0; i <= passwordStr.length; i++) {
+  for (let i = 0; i <= savedPasswordLength; i++) {
     //variable to get random index based off passwordStr length
     let randomIndex = Math.floor(Math.random() * passwordStr.length);
     //pick char based off randomIndex and append to generatedPassword
