@@ -24,13 +24,13 @@ User can generate a random password based on a set of requirements/prompts. Choo
 
 ## Deployed Link
 
-[Link]()
+[Link](https://smandla.github.io/random_password_generator/)
 
 ## Usage
 
 ### Website Demo
 
-![alt text]()
+![alt text](assets/demo.gif)
 
 ## Credits
 
